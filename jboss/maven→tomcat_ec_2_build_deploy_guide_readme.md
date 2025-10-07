@@ -1,7 +1,7 @@
 # 🚀 End-to-End: Build Java (Maven) on EC2 (Server-1) → Deploy WAR to Tomcat on EC2 (Server-2)
 
 > Purpose: A complete, copy‑paste friendly guide from creating EC2 instances to successful deployment of a `.war` built with Maven on one server and deployed to Apache Tomcat on a second server. Ready to drop into a GitHub repo as `README.md` or `DEPLOYMENT_GUIDE.md`.
-![](Screenshot%20(278).png)
+
 What it is: A straight‑forward runbook to build a Java web application with Maven on a build EC2 instance and deploy the resulting WAR to an Apache Tomcat server on a separate EC2 instance.
 
 Why it matters: Separating build and runtime servers keeps CI/CD pipelines clean, improves security (build environment does not serve traffic), and mirrors production deployment patterns used in real-world teams.
@@ -22,7 +22,13 @@ Via AWS Console (recommended for first time):**
 
 
 Once on the build-server (Ubuntu example):
+<img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/61eabaac-ba45-4f70-8972-cb16d84c5157" />
+on deploy server:
+<img width="602" height="259" alt="Image" src="https://github.com/user-attachments/assets/fd2b90f8-60c3-4845-90ec-5e3acff0c318" />
 
+<img width="602" height="210" alt="Image" src="https://github.com/user-attachments/assets/1f40af39-c2f4-46c1-9702-0524a0f1154f" />
+
+<img width="602" height="227" alt="Image" src="https://github.com/user-attachments/assets/41182ac3-c229-40cf-abed-d284c2e758df" />
 # Update OS
 ```
 sudo apt update && sudo apt upgrade -y
@@ -36,6 +42,7 @@ sudo apt install -y openjdk-11-jdk maven git
 java -version
 mvn -version
 ```
+<img width="602" height="96" alt="Image" src="https://github.com/user-attachments/assets/8a62e664-3551-4e8a-a8f7-155dd41de43d" />
 
 Here i have created code manually, and the architecture is:
 ```
@@ -158,13 +165,22 @@ And paste code in web.xml
 Build the WAR artifact:
 ```
 mvn clean package
+```
+<img width="602" height="299" alt="Image" src="https://github.com/user-attachments/assets/bb6abf10-3b35-48ef-a844-52dc76d5ce20" />
+
+```
+
 # After build find the WAR
+```
 ls -l target/*.war
 # e.g. target/webapp-0.1.3.war
 ```
+<img width="602" height="144" alt="Image" src="https://github.com/user-attachments/assets/3f94882d-41b9-471d-a126-97273cd2bff8" />
 
-If the build produces `webapp-0.1.3.war`, note the full path: `/home/ubuntu/JavaWebCalculator/target/webapp-0.1.3.war`
-
+If the build produces `webapp-0.1.3.war`, note the full path:
+```
+ `/home/ubuntu/JavaWebCalculator/target/webapp-0.1.3.war`
+```
 
 # C. Install JBoss (WildFly) (Deploy Server)
 SSH into Tomcat server:
@@ -177,6 +193,7 @@ Install Java (on Deploy server):
 sudo apt update && sudo apt install -y openjdk-11-jdk wget
 java -version
 ```
+<img width="602" height="144" alt="Image" src="https://github.com/user-attachments/assets/3f94882d-41b9-471d-a126-97273cd2bff8" />
 
 Download and Extract:
 ```
@@ -185,6 +202,7 @@ wget https://github.com/wildfly/wildfly/releases/download/30.0.0.Final/wildfly-3
 unzip wildfly-30.0.0.Final.zip
 mv wildfly-30.0.0.Final wildfly
 ```
+<img width="602" height="262" alt="Image" src="https://github.com/user-attachments/assets/60c370ea-9afe-4eeb-a981-02daacb1c930" />
 Start WildFly:
 ```
 cd wildfly/bin
@@ -205,6 +223,11 @@ bin/startup.sh
 # start the server
 ./startup.sh
 ```
+Visit the app in browser:
+```
+http://18.232.137.143:8080
+```
+
 
 Check Tomcat logs to confirm it started:
 ```bash
@@ -217,6 +240,9 @@ On your **local machine** you probably copied the PEM to build server earlier. I
 To copy pem file:
 ```
 scp -i task-key.pem task-key.pem username@<ip of build server>:~
+```
+<img width="602" height="180" alt="Image" src="https://github.com/user-attachments/assets/eb731f64-babb-4d7b-b74f-6a38f5b56628" />
+<img width="602" height="44" alt="Image" src="https://github.com/user-attachments/assets/f97ddaca-9991-40f7-a279-24940e661d3d" />
 
 ```bash
 # (on local) ensure pem has right perms
@@ -228,7 +254,10 @@ From the **build server**, use `scp` to copy the WAR into Tomcat's `webapps` dir
 scp -i task-key.pem /home/ubuntu/JavaWebCalculator/target/webapp-0.1.3.war \
     ubuntu@18.232.137.143:~/apache-tomcat-9.0.109/webapps/
 ```
+<img width="602" height="179" alt="Image" src="https://github.com/user-attachments/assets/78b0550c-a31a-46da-8cd5-3ea50a35642e" />
 
+<img width="602" height="82" alt="Image" src="https://github.com/user-attachments/assets/66e93a25-6e3b-4db7-96d9-c37bdebc5a79" />
+<img width="602" height="263" alt="Image" src="https://github.com/user-attachments/assets/39fa3506-9e96-44e6-beb0-65aba6d33318" />
 Example: copy to home then move with sudo:
 ```bash
 # From build-server
@@ -247,10 +276,11 @@ tail -f /opt/apache-tomcat-9.0.109/logs/catalina.out
 ```
 http://18.232.137.143:8080/webapp-0.1.3/
 ```
+<img width="602" height="283" alt="Image" src="https://github.com/user-attachments/assets/9908d030-3ccb-44c4-b07b-6e227ead9349" />
+
+<img width="602" height="274" alt="Image" src="https://github.com/user-attachments/assets/9d8e0acc-0621-4aa6-b38b-8055890aa342" />
+
 (If your WAR file name is `webapp-0.1.3.war` the context path becomes `/webapp-0.1.3`.)
-
----
-
 
 ## 7) Troubleshooting
 - **SCP permission denied**: ensure `chmod 400 task-key.pem` on machine where `scp` runs and correct user (`ubuntu`).
