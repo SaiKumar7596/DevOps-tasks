@@ -37,7 +37,8 @@ java -version
 mvn -version
 ```
 
-Have created own code manuallu, and the architecture is:
+Here i have created code manually, and the architecture is:
+```
 javawebapp/
 ├── pom.xml
 └── src/
@@ -46,6 +47,7 @@ javawebapp/
         ├── resources/
         └── webapp/
             └── WEB-INF/web.xml
+```
 pom.xml
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0"
