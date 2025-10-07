@@ -1,7 +1,7 @@
 # 🚀 End-to-End: Build Java (Maven) on EC2 (Server-1) → Deploy WAR to Tomcat on EC2 (Server-2)
 
 > Purpose: A complete, copy‑paste friendly guide from creating EC2 instances to successful deployment of a `.war` built with Maven on one server and deployed to Apache Tomcat on a second server. Ready to drop into a GitHub repo as `README.md` or `DEPLOYMENT_GUIDE.md`.
-
+![](Screenshot%20(278).png)
 What it is: A straight‑forward runbook to build a Java web application with Maven on a build EC2 instance and deploy the resulting WAR to an Apache Tomcat server on a separate EC2 instance.
 
 Why it matters: Separating build and runtime servers keeps CI/CD pipelines clean, improves security (build environment does not serve traffic), and mirrors production deployment patterns used in real-world teams.
