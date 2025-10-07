@@ -138,7 +138,7 @@ ls -l target/*.war
 If the build produces `webapp-0.1.3.war`, note the full path: `/home/ubuntu/JavaWebCalculator/target/webapp-0.1.3.war`
 
 
-# C. Prepare Tomcat Server (Deploy Server)
+# C. Install JBoss (WildFly) (Deploy Server)
 SSH into Tomcat server:
 ```bash
 ssh -i task-key.pem ubuntu@18.232.137.143
@@ -150,17 +150,26 @@ sudo apt update && sudo apt install -y openjdk-11-jdk wget
 java -version
 ```
 
-Download and extract Tomcat 9 (if you already did this, skip to start steps):
-```bash
-cd /home/ubuntu
-wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.109/bin/apache-tomcat-9.0.109.tar.gz
-tar -xvzf apache-tomcat-9.0.109.tar.gz
+Download and Extract:
 ```
-
+cd /home/ubuntu
+wget https://github.com/wildfly/wildfly/releases/download/30.0.0.Final/wildfly-30.0.0.Final.zip
+unzip wildfly-30.0.0.Final.zip
+mv wildfly-30.0.0.Final wildfly
+```
+Start WildFly:
+```
+cd wildfly/bin
+./standalone.sh &
+```
+Deploy WAR:
+```
+scp -i task-key.pem /home/ubuntu/javawebapp/target/javawebapp.war ubuntu@52.207.229.61:/home/ubuntu/wildfly/standalone/deployments/
+```
 
 Make Jboss scripts executable and create a dedicated tomcat user (recommended):
 
-Open port 8080 in this server
+Open port 8080 in Deploy Server on console(edit inbound rules)
 
 Start Jboss  (manual):
 ```
@@ -186,7 +195,7 @@ scp -i task-key.pem task-key.pem username@<ip of build server>:~
 chmod 400 task-key.pem
 ```
 
-From the **build server** (or local machine), use `scp` to copy the WAR into Tomcat's `webapps` directory. Example you already used:
+From the **build server**, use `scp` to copy the WAR into Tomcat's `webapps` directory. Example you already used:
 ```bash
 scp -i task-key.pem /home/ubuntu/JavaWebCalculator/target/webapp-0.1.3.war \
     ubuntu@18.232.137.143:~/apache-tomcat-9.0.109/webapps/
@@ -215,7 +224,7 @@ http://18.232.137.143:8080/webapp-0.1.3/
 ---
 
 
-## 7) Troubleshooting i got
+## 7) Troubleshooting
 - **SCP permission denied**: ensure `chmod 400 task-key.pem` on machine where `scp` runs and correct user (`ubuntu`).
 - **404 after deploy**: check `catalina.out` for deployment exceptions. Ensure WAR is not corrupted (`unzip -t webapp-0.1.3.war`).
 - **App fails to start**: check Java version and missing libraries.
