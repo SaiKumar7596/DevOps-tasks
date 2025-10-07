@@ -24,12 +24,15 @@ Via AWS Console (recommended for first time):**
 Once on the build-server (Ubuntu example):
 
 # Update OS
+```
 sudo apt update && sudo apt upgrade -y
-
+```
 # Install Java, Maven and Git
+```
 sudo apt install -y openjdk-11-jdk maven git
-
+```
 # Verify
+```
 java -version
 mvn -version
 ```
@@ -44,7 +47,7 @@ javawebapp/
         └── webapp/
             └── WEB-INF/web.xml
 pom.xml
-
+```
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -89,12 +92,13 @@ pom.xml
         </plugins>
     </build>
 </project>
+```
 Create the file:
-
+```
 src/main/java/com/example/web/HelloServlet.java
-
-paste in HelloServlet.java belo code
-
+```
+paste in HelloServlet.java below code
+```
 package com.example.web;
 
 import jakarta.servlet.*;
@@ -110,15 +114,37 @@ public class HelloServlet extends HttpServlet {
         response.getWriter().println("<p>Deployed on " + request.getServerName() + "</p>");
     }
 }
+```
 Create web.xml
+```
 src/main/webapp/WEB-INF/web.xml
+```
 And paste the below code in web.xml
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
 
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.example.web.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+</web-app>
+```
 Add Index.JSP
 ```
 src/main/webapp/index.jsp
 ```
 And paste code in web.xml
+```
 <html>
   <head><title>Java WebApp</title></head>
   <body>
@@ -128,7 +154,7 @@ And paste code in web.xml
 </html>
 ```
 Build the WAR artifact:
-```bash
+```
 mvn clean package
 # After build find the WAR
 ls -l target/*.war
