@@ -9,8 +9,6 @@ This project is a **Java Web Application** designed to run on **Java 17**, built
 
 <img width="602" height="260" alt="image" src="https://github.com/user-attachments/assets/92246703-330e-40f3-9e4b-7934b05ccdf1" />
 
-<img width="602" height="260" alt="image" src="https://github.com/user-attachments/assets/acc7f8ec-f1fd-48a7-8ea6-543ba07c6f77" />
-
 <img width="602" height="59" alt="image" src="https://github.com/user-attachments/assets/907da388-2d8b-4d54-9f64-4a7bd1e370aa" />
 
 
@@ -42,7 +40,8 @@ Git will be pre installed in the linux surver if nit install git using sudo apt 
 ```
 cd ~ git clone https://github.com/akracad/JavaWebCal.git 
 ```
-<img width="602" height="59" alt="image" src="https://github.com/user-attachments/assets/1008b4ea-0cfc-42a2-a698-0b219b3ff261" />
+<img width="602" height="129" alt="image" src="https://github.com/user-attachments/assets/1926a46d-923f-487c-b995-a5cb4c287731" />
+
  
 
 If the code is already on the build server, cd into the project directory: 
