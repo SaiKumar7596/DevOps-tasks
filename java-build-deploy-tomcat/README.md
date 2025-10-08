@@ -175,6 +175,8 @@ scp -i /path/to/local-key.pem /path/to/kk.key.pem ubuntu@BUILD_SERVER_IP:~/
 
 ## Change the .pem file permission:
 
+Example: sudo chmod 400 <.pem filename>
+
 
 <img width="584" height="226" alt="image" src="https://github.com/user-attachments/assets/5134545e-c4cc-483c-8b53-b07e7075ed12" />
 
