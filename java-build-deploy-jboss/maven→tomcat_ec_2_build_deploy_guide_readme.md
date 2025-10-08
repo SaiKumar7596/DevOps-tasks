@@ -1,4 +1,4 @@
-# 🚀 End-to-End: Build Java (Maven) on EC2 (Server-1) → Deploy WAR to Tomcat on EC2 (Server-2)
+# 🚀 End-to-End: Build Java (Maven) on EC2 (Server-1) → Deploy WAR to JBoss on EC2 (Server-2)
 
 > Purpose: A complete, copy‑paste friendly guide from creating EC2 instances to successful deployment of a `.war` built with Maven on one server and deployed to Apache Tomcat on a second server. Ready to drop into a GitHub repo as `README.md` or `DEPLOYMENT_GUIDE.md`.
 
