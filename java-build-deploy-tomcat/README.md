@@ -27,7 +27,9 @@ sudo apt install -y maven
 java -version 
 mvn -version 
 ```
-<img width="602" height="59" alt="image" src="https://github.com/user-attachments/assets/d289a3a0-a1e1-4044-9ef2-ce3366e558b0" />
+<img width="602" height="157" alt="image" src="https://github.com/user-attachments/assets/65c767c2-b964-4abc-81de-38bf3dd82083" />
+
+
 
 Use openjdk-11 if you need Java 11; adjust accordinngly.
 
@@ -37,7 +39,8 @@ If your project is in Git:
 
 Git will be pre installed in the linux surver if nit install git using sudo apt –y install git than : 
 
-```cd ~ git clone https://github.com/akracad/JavaWebCal.git 
+```
+cd ~ git clone https://github.com/akracad/JavaWebCal.git 
 ```
 <img width="602" height="59" alt="image" src="https://github.com/user-attachments/assets/1008b4ea-0cfc-42a2-a698-0b219b3ff261" />
  
