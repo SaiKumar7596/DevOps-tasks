@@ -17,7 +17,7 @@ This project is a **Java Web Application** designed to run on **Java 17**, built
 update + essential tools 
 ```
 sudo apt update 
-sudo apt install -y openjdk-17-jdk maven git wget unzip curl 
+sudo apt install -y openjdk-17-jdk
 sudo apt install -y maven 
  ```
 ## verify 
